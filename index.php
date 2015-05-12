@@ -1,4 +1,20 @@
+<!doctype html>
+<html>
+<head>
+	<title>Status Page</title>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="//bootswatch.com/yeti/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="filter_table.css" rel="stylesheet" type="text/css" />
+
+	<script src="//code.jquery.com/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="filter_table.js"></script>
+	</head>
+<body>
 <?php
+	error_reporting(-1);
 	require __DIR__ . '/SourceQuery/SourceQuery.class.php';
 	define( 'SQ_SERVER_ADDR', '37.187.170.178' ); //zero one
 	define( 'SQ_SERVER_PORT', 2303 );
@@ -11,11 +27,14 @@
 		$Query->Connect( SQ_SERVER_ADDR, SQ_SERVER_PORT, SQ_TIMEOUT, SQ_ENGINE );
 		$players_online = $Query->GetInfo()['Players'];
 		$arma_online = true;
+		$playerlist = $Query->GetPlayers();
+
 		/*
 		echo '<pre>';
-		print_r( $Query->GetInfo( ) );
-		print_r( $Query->GetPlayers( ) );
+		//print_r( $Query->GetInfo( ) );
+		echo print_r($playerlist['0']['Name']);
 		echo '</pre>';
+		echo $playerlist;
 		*/
 	}
 	catch( Exception $e )
@@ -56,13 +75,7 @@
 		$ts3_label_text = 'Not Operational';
 	endif;
 ?>
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="//bootswatch.com/yeti/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="filter_table.css" rel="stylesheet" type="text/css" />
-
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="filter_table.js"></script>
+<!--
  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -73,6 +86,7 @@
   ga('send', 'pageview');
 
 </script>
+-->
   
   <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -103,24 +117,18 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>
-									<!-- <td>@mdo</td> -->
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Jacob</td>
-									<td>Thornton</td>
-									<!-- <td>@fat</td> -->
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Larry</td>
-									<td>the Bird</td>
-									<!-- <td>@twitter</td> -->
-								</tr>
+								<?php
+								/*
+								*/
+								foreach($playerlist as $key => $value) 
+								{
+									echo '<tr>';
+										echo '<td>'. $key . '</td>';
+										echo '<td>'. $value['Name'] . '</td>';
+										echo '<td>'. $value['TimeF'] . '</td>';
+									echo '</tr>';
+								}
+								?>
 							</tbody>
 						</table>
 					</div>
@@ -167,7 +175,7 @@
                           <div class="list-group-item">
                               <h4 class="list-group-item-heading">
                                   Arma3 Server
-                                  <a href="#"  data-toggle="tooltip" data-placement="bottom" title="Gameserver">
+                                  <a class="mouse_pointer" data-toggle="tooltip" data-placement="right" title="Gameserver">
                                     <i class="fa fa-question-circle"></i>
                                   </a>
                               </h4>
@@ -180,7 +188,7 @@
                           <div class="list-group-item">
                               <h4 class="list-group-item-heading">
                                   Teamspeak 3 
-                                  <a href="#"  data-toggle="tooltip" data-placement="bottom" title="Voice communication server">
+                                  <a class="mouse_pointer" data-toggle="tooltip" data-placement="right" title="Voice communication server">
                                     <i class="fa fa-question-circle"></i>
                                   </a>
                               </h4>
@@ -207,3 +215,5 @@
           </div>
       </div>
   </div>
+</body>
+</html>

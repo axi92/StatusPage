@@ -21,3 +21,9 @@
 .filterable .filters input[disabled]:-ms-input-placeholder {
     color: #333;
 }
+.mouse_pointer {
+	cursor: pointer
+}
+.badge {
+	cursor: pointer
+}

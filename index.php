@@ -61,7 +61,7 @@
 
 
 
-	if($arma_online == true && $online0 >= 1):
+	if($arma_online == true && $online0 >= 1 && $players_online > -1):
 		$systemstatus = 'All Systems Operational';
 		$statuscolor = 'success';
 	else:
@@ -69,7 +69,7 @@
 		$statuscolor = 'warning';
 	endif;
 	//ARMA 3 Label
-	if($arma_online == true):
+	if($arma_online == true && $players_online > -1):
 		$arma3_label = 'success';
 		$arma3_label_text = 'Operational';
 	else:

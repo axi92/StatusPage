@@ -117,6 +117,12 @@
 							<tbody>
 								<?php
 								/*
+								$cop_ranks = array("[Kommissar]", "[Rekrut]", "[Oberkommissar]", "[Wachtm.]", "[Wachtmeister]");
+								$medic_ranks = array("[Oberarzt]", "[Notarzt]");
+								$adac_ranks = array("[ADAC]");
+								$cop_count = 0;
+								$medic_count = 0;
+								$adac_count = 0;
 								*/
 								foreach($playerlist as $key => $value) 
 								{
@@ -125,6 +131,17 @@
 										echo '<td>'. $value['Name'] . '</td>';
 										echo '<td>'. $value['TimeF'] . '</td>';
 									echo '</tr>';
+									/*
+									//Copcount
+									for($i = 1; $i < count($cop_ranks); $i++)
+									{
+										if(false === strpos($value['Name'], $cop_ranks[$i]) ):
+										else: 
+											$cop_count++; 
+											break;
+										endif;
+									}
+									*/
 								}
 								?>
 							</tbody>

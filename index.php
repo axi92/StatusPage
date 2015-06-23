@@ -51,6 +51,37 @@
 	{
 		echo $e->getMessage( );
 	}
+	$Query->Disconnect();
+
+
+//ARK PART
+
+	define( 'SQ_SERVER_ADDR_ARK', '31.214.216.128' ); //zero one
+	define( 'SQ_SERVER_PORT_ARK', 27016 );
+	$Query_ark = new SourceQuery( );
+	
+	try
+	{
+		$Query_ark->Connect( SQ_SERVER_ADDR_ARK, SQ_SERVER_PORT_ARK, SQ_TIMEOUT, SQ_ENGINE );
+		$players_online_ark = $Query_ark->GetInfo()['Players'];
+		$ark_online = true;
+		$playerlist_ark = $Query_ark->GetPlayers();
+
+		/*
+		echo '<pre>';
+		//print_r( $Query_ark->GetInfo( ) );
+		echo print_r($playerlist['0']['Name']);
+		echo '</pre>';
+		echo $playerlist_ark;
+		*/
+	}
+	catch( Exception $e )
+	{
+		echo $e->getMessage( );
+	}
+	$Query_ark->Disconnect();
+
+//ARK PART END
 
 	//TEAMSPEAK 3 CHECK
 	$ts_ip = "ts.zero-one.cc";
@@ -61,7 +92,7 @@
 
 
 
-	if($arma_online == true && $online0 >= 1 && $players_online > -1):
+	if($arma_online == true && $online0 >= 1 && $players_online > -1 && $ark_online == true && $players_online_ark > -1):
 		$systemstatus = 'All Systems Operational';
 		$statuscolor = 'success';
 	else:
@@ -84,6 +115,14 @@
 		$ts3_label = 'danger';
 		$ts3_label_text = 'Not Operational';
 	endif;
+	//ARK Label
+	if($ark_online == true && $players_online_ark > -1):
+		$ark_label = 'success';
+		$ark_label_text = 'Operational';
+	else:
+		$ark_label = 'danger';
+		$ark_label_text = 'Not Operational';
+	endif;
 ?>
   
   <!-- Modal -->
@@ -95,8 +134,6 @@
 				<h4 class="modal-title" id="myModalLabel">Players Online</h4>
 			</div>
 			<div class="modal-body">
-
-			
 				<div class="row">
 					<div class="panel panel-primary filterable">
 						<div class="panel-heading">
@@ -148,11 +185,6 @@
 						</table>
 					</div>
 				</div>			
-			
-			
-			
-			
-			
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -161,7 +193,56 @@
 		</div>
 	</div>
 </div>  
-  
+
+<!-- ARK Modal -->
+<div class="modal fade" id="myModal_ark" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Players Online</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="panel panel-primary filterable">
+						<div class="panel-heading">
+							<h3 class="panel-title">Users</h3>
+							<div class="pull-right">
+								<button class="btn btn-default btn-xs btn-filter"><span class="fa fa-search"></span> Filter</button>
+							</div>
+						</div>
+						<table class="table">
+							<thead>
+								<tr class="filters">
+									<th><input type="text" class="form-control" placeholder="#" disabled></th>
+									<th><input type="text" class="form-control" placeholder="Name" disabled></th>
+									<th><input type="text" class="form-control" placeholder="Playtime" disabled></th>
+									<!-- <th><input type="text" class="form-control" placeholder="Username" disabled></th> -->
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								foreach($playerlist_ark as $key => $value) 
+								{
+									echo '<tr>';
+										echo '<td>'. $key . '</td>';
+										echo '<td>'. $value['Name'] . '</td>';
+										echo '<td>'. $value['TimeF'] . '</td>';
+									echo '</tr>';
+								}
+								?>
+							</tbody>
+						</table>
+					</div>
+				</div>			
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+			</div>
+		</div>
+	</div>
+</div>  
   
   
   
@@ -211,19 +292,20 @@
                                   <span class="label label-<?php echo $ts3_label ?>"><?php echo $ts3_label_text; ?></span>
                               </p>
                           </div>
-                        <!--
+
                           <div class="list-group-item">
                               <h4 class="list-group-item-heading">
-                                  Database Server 
-                                  <a href="#"  data-toggle="tooltip" data-placement="bottom" title="Access database server and execute queries">
+                                  ARK: Survival Evolved 
+                                  <a class="mouse_pointer"  data-toggle="tooltip" data-placement="right" title="Gameserver">
                                     <i class="fa fa-question-circle"></i>
                                   </a>
                               </h4>
                               <p class="list-group-item-text">
-                                  <span class="label label-success">Operational</span>
+                                  <span class="label label-<?php echo $ark_label; ?>"><?php echo $ark_label_text; ?></span>
+								  <span class="badge" data-toggle="modal" data-target="#myModal_ark"><?php echo $players_online_ark; ?> Players Online</span>
                               </p>
                           </div>
-                         --> 
+
                       </div>
                   </div>
               </div>

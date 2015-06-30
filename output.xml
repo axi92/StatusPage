@@ -1,2 +1,2 @@
 <?xml version="1.0"?>
-<playerlist><item0><Title>rose</Title><Price>1.25</Price><Number>15</Number></item0><item1><Title>daisy</Title><Price>0.75</Price><Number>25</Number></item1><item2><Title>orchid</Title><Price>1.15</Price><Number>7</Number></item2></playerlist>
+<playerlist><item0><item0><0>rose</0><1>1.25</1><2>15</2></item0><item1><0>daisy</0><1>0.75</1><2>25</2></item1><item2><0>orchid</0><1>1.15</1><2>7</2></item2></item0><item1><item0><0>rose</0><1>1.25</1><2>15</2></item0><item1><0>daisy</0><1>0.75</1><2>25</2></item1><item2><0>orchid</0><1>1.15</1><2>7</2></item2></item1><item2><item0><0>rose</0><1>1.25</1><2>15</2></item0><item1><0>daisy</0><1>0.75</1><2>25</2></item1><item2><0>orchid</0><1>1.15</1><2>7</2></item2></item2></playerlist>

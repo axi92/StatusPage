@@ -34,6 +34,20 @@ $Query->Disconnect();
 // creating object of SimpleXMLElement
 $xml_playerlist = new SimpleXMLElement("<?xml version=\"1.0\"?><playerlist></playerlist>");
 
+$playerlist = array( array( Title => "rose", 
+                      Price => 1.25,
+                      Number => 15 
+                    ),
+               array( Title => "daisy", 
+                      Price => 0.75,
+                      Number => 25,
+                    ),
+               array( Title => "orchid", 
+                      Price => 1.15,
+                      Number => 7 
+                    )
+             ); 
+
 // function call to convert array to xml
 array_to_xml($playerlist,$xml_playerlist);
 

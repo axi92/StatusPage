@@ -26,10 +26,7 @@
 <?php
 	error_reporting(-1);
 	require __DIR__ . '/SourceQuery/SourceQuery.class.php';
-	define( 'SQ_SERVER_ADDR', '37.187.170.178' ); //zero one
-	define( 'SQ_SERVER_PORT', 2303 );
-	define( 'SQ_TIMEOUT',     1 );
-	define( 'SQ_ENGINE',      SourceQuery :: SOURCE );	
+	require __DIR__ . '/config.php';
 	$Query = new SourceQuery( );
 	
 	try
@@ -56,8 +53,6 @@
 
 //ARK PART
 
-	define( 'SQ_SERVER_ADDR_ARK', '31.214.216.128' ); //zero one
-	define( 'SQ_SERVER_PORT_ARK', 27016 );
 	$Query_ark = new SourceQuery( );
 	
 	try

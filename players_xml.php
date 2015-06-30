@@ -48,9 +48,17 @@ $playerlist = array(array(array("rose", 1.25, 15),
                     array("orchid", 1.15, 7) 
                    )
              ); 
-
+$playerlist_new = array();
+foreach ($playerlist as $key => $value) {
+    $playerlist_new['key'.$key] = $value;
+}  			 
+echo '<pre>';
+print_r($playerlist_new);
+echo '</pre>';
+break;	
 // function call to convert array to xml
 array_to_xml($playerlist,$xml_playerlist);
+
 
 //saving generated xml file
 $xml_playerlist->asXML('output.xml');

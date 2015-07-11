@@ -5,5 +5,5 @@ define( 'SQ_TIMEOUT',     1 );
 define( 'SQ_ENGINE',      SourceQuery :: SOURCE );	
 
 define( 'SQ_SERVER_ADDR_ARK', '94.23.217.142' ); //zero one ark
-define( 'SQ_SERVER_PORT_ARK', 27016 ); //ark
+define( 'SQ_SERVER_PORT_ARK', 27015); //ark
 ?>
